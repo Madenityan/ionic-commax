@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "node ./ng-add-pug-loader.js"
+    "postinstall": "node ./ng-add-pug-loader.js",
+    "ionic-run-android": "ionic cordova run android"
   },
   "private": true,
   "dependencies": {
@@ -21,11 +22,13 @@
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
+    "@ionic-native/camera": "^5.7.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.4.2",
     "cordova-android": "7.1.4",
+    "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^4.0.1",
@@ -78,7 +81,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"
