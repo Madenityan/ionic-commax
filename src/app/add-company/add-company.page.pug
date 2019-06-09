@@ -1,0 +1,24 @@
+ion-header
+  ion-toolbar
+    ion-buttons(slot="start")
+      ion-back-button(defaultHref="home")
+    ion-title Create company
+ion-content.add-company-content
+  form.add-company-form([formGroup]="addCompanyForm", (ngSubmit)='addCompany(addCompanyForm)')
+    .company-avatar((click)="addImage()")
+      input.input-file(type='file', formControlName="picture")
+      ion-img.image-input-file(*ngIf="photo !== ''", src='{{photo}}')
+    ion-item.item-add-company
+      ion-label(position="floating") Name
+      ion-input(required, formControlName="name", type="text")
+    ion-item.item-add-company
+      ion-label(position="floating") City
+      ion-input(required, formControlName="city", type="text")
+    ion-item.item-add-company
+      ion-label(position="floating") Address
+      ion-input(required, formControlName="address", type="text")
+    ion-button.btn-form(type="submit", color='primary', expand="block") Create company
+
+
+
+
