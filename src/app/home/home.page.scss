@@ -1,5 +1,23 @@
+ion-header {
+  direction: rtl;
+}
+
 .home-content {
+  direction: rtl;
+
   ion-list {
     height: 100%;
+  }
+
+  .label-item {
+    margin-right: 15%;
+
+    h2 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 15px;
+    }
   }
 }

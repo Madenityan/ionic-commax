@@ -15,9 +15,7 @@ export class HomePage implements OnInit {
   constructor(private companiesService: CompaniesService) {}
 
   ngOnInit() {
-    // this.listCompanies = this.companiesService.getSavedCompany();
     this.loadNextPage();
-    // this.loadNextPage();
   }
 
   loadData(event) {

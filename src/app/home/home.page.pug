@@ -13,9 +13,11 @@ ion-content.home-content
       ion-fab-button(color="success")
         ion-icon(name="add", routerLink="/add-company")
   ion-list
-    ion-item(*ngFor="let company of listCompanies")
-      h2 {{company.name}}
-      span {{company.city}}
-      p {{company.address}}
+    ion-item(*ngFor="let company of listCompanies", lines="full")
+      ion-thumbnail
+        ion-img([src]="company.image")
+      ion-label.label-item {{company.name}}
+        h2 {{company.city}}
+        p {{company.address}}
   ion-infinite-scroll(threshold="100px", (ionInfinite)="loadData($event)")
     ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more data..." )
