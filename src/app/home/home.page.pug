@@ -3,10 +3,19 @@ ion-header()
     ion-title Ноme
 ion-content.home-content
   ion-fab(vertical="bottom" horizontal="end" slot="fixed")
-    ion-fab-button.btn-fab
-      ion-icon(name="add", routerLink="/add-company")
-    ion-fab-button.btn-fab
-      ion-icon(name="trash")
-    ion-fab-button.btn-fab
-      ion-icon(name="exit")
-
+    ion-fab-button
+      ion-icon(name="add")
+    ion-fab-list(side="top")
+      ion-fab-button(color="secondary")
+        ion-icon(name="exit")
+      ion-fab-button(color="danger")
+        ion-icon(name="trash")
+      ion-fab-button(color="success")
+        ion-icon(name="add", routerLink="/add-company")
+  ion-list
+    ion-item(*ngFor="let company of listCompanies")
+      h2 {{company.name}}
+      span {{company.city}}
+      p {{company.address}}
+  ion-infinite-scroll(threshold="100px", (ionInfinite)="loadData($event)")
+    ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more data..." )
