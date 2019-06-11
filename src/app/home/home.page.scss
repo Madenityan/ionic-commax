@@ -5,10 +5,6 @@ ion-header {
 .home-content {
   direction: rtl;
 
-  ion-list {
-    height: 100%;
-  }
-
   .label-item {
     margin-right: 15%;
 
@@ -19,5 +15,11 @@ ion-header {
     p {
       font-size: 15px;
     }
+  }
+
+  .bottom-scroll {
+    height: 10vh;
+    position: absolute;
+    bottom: -100px;
   }
 }

@@ -89,6 +89,6 @@
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-plugin-telerik-imagepicker" spec="2.3.2" />
     <plugin name="cordova-sqlite-storage" spec="3.2.0" />
-    <allow-navigation href="http://localhost:8100" sessionid="1b4ccbdb" />
+    <allow-navigation href="http://localhost:8100" sessionid="46dbdd1f" />
     <engine name="android" spec="7.1.4" />
 </widget>

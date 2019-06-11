@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "node ./ng-add-pug-loader.js",
-    "ionic-run-android": "ionic cordova run android"
+    "ionic-run-android": "ionic cordova run android",
+    "livereload-android": "ionic cordova run android --livereload"
   },
   "private": true,
   "dependencies": {

@@ -1,5 +1,5 @@
 ion-header()
-  ion-toolbar
+  ion-toolbar(color="primary")
     ion-title Ноme
 ion-content.home-content
   ion-fab(vertical="bottom" horizontal="end" slot="fixed")
@@ -19,5 +19,7 @@ ion-content.home-content
       ion-label.label-item {{company.name}}
         h2 {{company.city}}
         p {{company.address}}
+      ion-icon(name="trash", size="large", color="danger", (click)="removeCompany(company.id)")
+  .bottom-scroll &nbsp;
   ion-infinite-scroll(threshold="100px", (ionInfinite)="loadData($event)")
-    ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more data..." )
+    ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more ..." )
