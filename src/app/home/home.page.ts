@@ -15,20 +15,33 @@ export class HomePage implements OnInit {
   allCompanies;
 
   constructor(private companiesService: CompaniesService, private storage: Storage) {
-    this.allCompanies = this.companiesService.getSavedCompany();
   }
 
-  ngOnInit() {
-    this.addId();
+  async ngOnInit() {
+    await this.updateListData();
     this.loadNextPage();
   }
 
-  addId() {
-    const i = 0;
-    this.allCompanies.forEach((item, index) => {
-      item.id = index + 1;
-    });
+  async ionViewWillEnter() {
+    await this.updateListData();
+    this.resetPages();
   }
+
+  private async updateListData() {
+    this.allCompanies = await this.companiesService.getSavedCompany();
+  }
+
+  private resetPages() {
+    this.listCompanies = [];
+    this.currentPage = 0;
+    this.loadNextPage();
+  }
+
+  // addId() {
+  //   this.allCompanies.forEach((item, index) => {
+  //     item.id = index + 1;
+  //   });
+  // }
 
   loadData(event) {
     setTimeout(() => {
@@ -39,7 +52,7 @@ export class HomePage implements OnInit {
   }
 
   loadNextPage() {
-    const allData = this.companiesService.getSavedCompany();
+    const allData = this.allCompanies;
     const offset = this.currentPage * this.numberPerPage;
     this.listCompanies = this.listCompanies.concat(allData.slice(offset, offset + this.numberPerPage));
     this.currentPage++;
@@ -50,10 +63,18 @@ export class HomePage implements OnInit {
     if (index > -1) {
       this.allCompanies.splice(index, 1);
     }
-    this.storage.set('сompanies', this.allCompanies).then(res => {
-      this.listCompanies = [];
-      this.currentPage = 0;
-      this.loadNextPage();
+    this.storage.set('companies', this.allCompanies).then(res => {
+      this.resetPages();
     });
+  }
+
+  removeAllItems() {
+    this.storage.remove('companies').then(res => {
+      this.listCompanies = [];
+    });
+  }
+
+  exitApp() {
+    navigator['app'].exitApp();
   }
 }

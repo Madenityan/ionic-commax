@@ -7,11 +7,11 @@ ion-content.home-content
       ion-icon(name="add")
     ion-fab-list(side="top")
       ion-fab-button(color="secondary")
-        ion-icon(name="exit")
-      ion-fab-button(color="danger")
+        ion-icon(name="exit", (click)="exitApp()")
+      ion-fab-button(color="danger", (click)="removeAllItems()")
         ion-icon(name="trash")
-      ion-fab-button(color="success")
-        ion-icon(name="add", routerLink="/add-company")
+      ion-fab-button(color="success", routerLink="/add-company")
+        ion-icon(name="add")
   ion-list
     ion-item(*ngFor="let company of listCompanies", lines="full")
       ion-thumbnail
@@ -22,4 +22,4 @@ ion-content.home-content
       ion-icon(name="trash", size="large", color="danger", (click)="removeCompany(company.id)")
   .bottom-scroll &nbsp;
   ion-infinite-scroll(threshold="100px", (ionInfinite)="loadData($event)")
-    ion-infinite-scroll-content(loadingSpinner="bubbles", loadingText="Loading more ..." )
+    ion-infinite-scroll-content(loadingSpinner="bubbles")

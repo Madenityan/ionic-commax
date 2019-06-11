@@ -1,12 +1,12 @@
 ion-header
   ion-toolbar(color="primary")
-    ion-buttons(slot="start")
-      ion-back-button(defaultHref="home")
+    ion-buttons(slot="start", routerLink="/home")
+      ion-icon.icon-back(name="arrow-round-forward")
     ion-title Create company
 ion-content.add-company-content
   form.add-company-form([formGroup]="addCompanyForm", (ngSubmit)='addCompany(addCompanyForm)')
     .company-avatar((click)="openActionSheet()")
-      input.input-file(type='text', formControlName="picture")
+      input.input-file(type='text', formControlName="image")
       ion-img.image-input-file(*ngIf="photo !== ''", [src]='photo')
     ion-item.item-add-company
       ion-label(position="floating") Name

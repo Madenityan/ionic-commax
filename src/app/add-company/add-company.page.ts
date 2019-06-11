@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import {ActionSheetController} from '@ionic/angular';
 import {ImagePicker} from '@ionic-native/image-picker/ngx';
 import { Storage } from '@ionic/storage';
+import {CompaniesService} from '../services/companies.service';
 
 @Component({
   selector: 'app-add-company',
@@ -14,12 +15,14 @@ export class AddCompanyPage implements OnInit {
 
     public addCompanyForm: FormGroup;
     photo = '';
+    allCompanies;
 
     constructor(private formBuilder: FormBuilder,
                 private camera: Camera,
                 private imagePicker: ImagePicker,
                 public actionSheetController: ActionSheetController,
-                private storage: Storage) {
+                private storage: Storage,
+                private companiesService: CompaniesService) {
     }
 
   ngOnInit() {
@@ -27,7 +30,7 @@ export class AddCompanyPage implements OnInit {
           name: [, [Validators.required]],
           city: [, [Validators.required]],
           address: [, [Validators.required]],
-          picture: [, [Validators.required]]
+          image: [, [Validators.required]]
       });
   }
 
@@ -52,11 +55,6 @@ export class AddCompanyPage implements OnInit {
         await actionSheet.present();
     }
 
-    addCompany() {
-        console.log(this.addCompanyForm.value);
-        this.storage.set('company', this.photo);
-    }
-
     addPhoto() {
         const options: CameraOptions = {
             quality: 25,
@@ -66,7 +64,7 @@ export class AddCompanyPage implements OnInit {
         };
         this.camera.getPicture(options).then((imageData) => {
                 this.photo = 'data:image/jpeg;base64,' + imageData;
-                this.addCompanyForm.controls.picture.setValue(this.photo);
+                this.addCompanyForm.controls.image.setValue(this.photo);
             },
             (err) => {
                 console.error(err);
@@ -82,8 +80,24 @@ export class AddCompanyPage implements OnInit {
         };
         this.imagePicker.getPictures(options).then((results) => {
             this.photo = 'data:image/jpeg;base64,' + results;
+            this.addCompanyForm.controls.image.setValue(this.photo);
         }, (err) => {
                 console.error(err);
         });
     }
+
+  addCompany() {
+    this.storage.get('companies').then(data => {
+      this.allCompanies = data;
+      const company = this.addCompanyForm.value;
+      const lastElement = this.allCompanies[this.allCompanies.length - 1];
+      company.id = (lastElement && lastElement.id) ? lastElement.id + 1 : this.allCompanies.length + 1;
+      this.allCompanies.push(company);
+      this.storage.set('companies', this.allCompanies).then(res => {
+        console.log('added');
+      });
+      this.addCompanyForm.reset();
+      // redirect to home screen
+    });
+  }
 }

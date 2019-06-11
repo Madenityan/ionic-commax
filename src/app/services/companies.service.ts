@@ -108,8 +108,17 @@ export class CompaniesService {
     },
   ];
 
-    getSavedCompany() {
-      this.storage.set('сompanies', this.companies);
+    async getSavedCompany() {
+      const companies = await this.storage.get('companies');
+      if (companies && companies.length > 10) {
+        this.companies = companies;
+      } else {
+        this.companies.forEach((item, index) => {
+          item['id'] = index + 1;
+        });
+        await this.storage.set('companies', this.companies);
+      }
+
       return this.companies;
     }
 }
