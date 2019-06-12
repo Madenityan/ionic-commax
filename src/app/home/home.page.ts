@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {CompaniesService} from '../services/companies.service';
 import { Storage } from '@ionic/storage';
+import {NavController} from '@ionic/angular';
+import {NavigationExtras} from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.pug',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage implements OnInit {
 
   listCompanies = [];
@@ -14,7 +17,10 @@ export class HomePage implements OnInit {
   currentPage = 0;
   allCompanies;
 
-  constructor(private companiesService: CompaniesService, private storage: Storage) {
+  constructor(private companiesService: CompaniesService,
+              private storage: Storage,
+              private ref: ChangeDetectorRef,
+              private navController: NavController) {
   }
 
   async ngOnInit() {
@@ -29,6 +35,7 @@ export class HomePage implements OnInit {
 
   private async updateListData() {
     this.allCompanies = await this.companiesService.getSavedCompany();
+    this.ref.detectChanges();
   }
 
   private resetPages() {
@@ -76,5 +83,14 @@ export class HomePage implements OnInit {
 
   exitApp() {
     navigator['app'].exitApp();
+  }
+
+  openDetails(company) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        company
+      }
+    };
+    this.navController.navigateForward(['details-company'], navigationExtras);
   }
 }

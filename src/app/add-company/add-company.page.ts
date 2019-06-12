@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import {ActionSheetController} from '@ionic/angular';
+import {ActionSheetController, NavController} from '@ionic/angular';
 import {ImagePicker} from '@ionic-native/image-picker/ngx';
 import { Storage } from '@ionic/storage';
 import {CompaniesService} from '../services/companies.service';
@@ -22,7 +22,8 @@ export class AddCompanyPage implements OnInit {
                 private imagePicker: ImagePicker,
                 public actionSheetController: ActionSheetController,
                 private storage: Storage,
-                private companiesService: CompaniesService) {
+                private companiesService: CompaniesService,
+                private navController: NavController) {
     }
 
   ngOnInit() {
@@ -97,7 +98,7 @@ export class AddCompanyPage implements OnInit {
         console.log('added');
       });
       this.addCompanyForm.reset();
-      // redirect to home screen
+      this.navController.navigateBack('home');
     });
   }
 }

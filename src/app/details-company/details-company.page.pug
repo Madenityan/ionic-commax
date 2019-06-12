@@ -1,0 +1,15 @@
+ion-header
+  ion-toolbar(color="primary")
+    ion-buttons(slot="start", routerLink="/home")
+      ion-icon.icon-back(name="arrow-round-forward")
+    ion-title Company details
+ion-content.company-details
+  ion-card
+    ion-card-content
+      ion-img.img-details([src]="company.image")
+      ion-label {{company.name}}
+        h2 {{company.city}}
+        p {{company.address}}
+
+
+
