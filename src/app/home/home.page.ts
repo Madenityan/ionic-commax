@@ -44,12 +44,6 @@ export class HomePage implements OnInit {
     this.loadNextPage();
   }
 
-  // addId() {
-  //   this.allCompanies.forEach((item, index) => {
-  //     item.id = index + 1;
-  //   });
-  // }
-
   loadData(event) {
     setTimeout(() => {
       console.log('Done');
@@ -65,7 +59,8 @@ export class HomePage implements OnInit {
     this.currentPage++;
   }
 
-  removeCompany(id) {
+  removeCompany(event, id) {
+    // event.stopPropagation();
     const index = this.allCompanies.findIndex(company => company.id === id);
     if (index > -1) {
       this.allCompanies.splice(index, 1);

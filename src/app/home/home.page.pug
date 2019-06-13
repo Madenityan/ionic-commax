@@ -13,13 +13,14 @@ ion-content.home-content
       ion-fab-button(color="success", routerLink="/add-company")
         ion-icon(name="add")
   ion-list
-    ion-item(*ngFor="let company of listCompanies", lines="full", (click)="openDetails(company)")
-      ion-thumbnail
+    ion-item(*ngFor="let company of listCompanies", lines="full")
+      ion-thumbnail((click)="openDetails(company)")
         ion-img([src]="company.image")
-      ion-label.label-item {{company.name}}
+      ion-label.label-item((click)="openDetails(company)") {{company.name}}
         h2 {{company.city}}
         p {{company.address}}
-      ion-icon(name="trash", size="large", color="danger", (click)="removeCompany(company.id)")
+      ion-button(color="danger", (click)="removeCompany($event, company.id);$event.stopPropagation;")
+        ion-icon(name="trash")
   .bottom-scroll &nbsp;
   ion-infinite-scroll(threshold="100px", (ionInfinite)="loadData($event)")
     ion-infinite-scroll-content(loadingSpinner="bubbles")

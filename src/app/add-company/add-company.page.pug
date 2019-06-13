@@ -4,7 +4,7 @@ ion-header
       ion-icon.icon-back(name="arrow-round-forward")
     ion-title Create company
 ion-content.add-company-content
-  form.add-company-form([formGroup]="addCompanyForm", (ngSubmit)='addCompany(addCompanyForm)')
+  form.add-company-form([formGroup]="addCompanyForm", (ngSubmit)='addCompany()')
     .company-avatar((click)="openActionSheet()")
       input.input-file(type='text', formControlName="image")
       ion-img.image-input-file(*ngIf="photo !== ''", [src]='photo')
