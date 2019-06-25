@@ -54,7 +54,7 @@ export class DetailsCompanyPage implements OnInit {
       }
     });
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
+      // alert('clicked');
     });
   }
 }
