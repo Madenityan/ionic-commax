@@ -5,7 +5,7 @@ import {ActionSheetController, NavController} from '@ionic/angular';
 import {ImagePicker} from '@ionic-native/image-picker/ngx';
 import {Storage} from '@ionic/storage';
 import {CompaniesService} from '../services/companies.service';
-import {Geocoder, GeocoderResult, GoogleMap, GoogleMapOptions, GoogleMaps} from '@ionic-native/google-maps';
+import {Geocoder, GeocoderResult, GoogleMap} from '@ionic-native/google-maps';
 
 @Component({
     selector: 'app-add-company',
@@ -44,8 +44,6 @@ export class AddCompanyPage implements OnInit {
             address: [, [Validators.required]],
             image: [, [Validators.required]]
         });
-        const mapOptions: GoogleMapOptions = {};
-        this.map = GoogleMaps.create('add_location', mapOptions);
     }
 
     async openActionSheet() {
@@ -128,13 +126,15 @@ export class AddCompanyPage implements OnInit {
 
     addLocations(e) {
         console.log(e);
-        this.company.address = e;
         Geocoder.geocode({
-            address: this.addCompanyForm.get('city').value + this.addCompanyForm.get('address').value
+            address: (this.addCompanyForm.get('city').value || '') + ' ' + (this.addCompanyForm.get('address').value || '')
         }).then((results: GeocoderResult[]) => {
-            const position = results[0].position;
-            this.company.latitude = position.lat.toString();
-            this.company.longitude = position.lng.toString();
+            console.log('results', results);
+            if (results && results.length) {
+                const position = results[0].position;
+                this.company.latitude = position.lat.toString();
+                this.company.longitude = position.lng.toString();
+            }
         });
     }
 }
