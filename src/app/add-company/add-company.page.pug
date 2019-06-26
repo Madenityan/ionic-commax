@@ -16,7 +16,7 @@ ion-content.add-company-content
       ion-input(required, formControlName="city", type="text")
     ion-item.item-add-company
       ion-label(position="floating") Address
-      ion-input(required, formControlName="address", type="text", (ngModelChange)="addMap($event)")
+      ion-input(required, formControlName="address", type="text", (ngModelChange)="addLocations($event)")
     div(id='add_location')
     ion-button.btn-form(type="submit", color='primary', expand="block") Create company
 

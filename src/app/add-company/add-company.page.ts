@@ -112,23 +112,21 @@ export class AddCompanyPage implements OnInit {
             const company: any = this.addCompanyForm.value;
             company.latitude = this.company.latitude;
             company.longitude = this.company.longitude;
-            // const lastElement = this.allCompanies[this.allCompanies.length - 1];
-            // company.id = (lastElement && lastElement.id) ? lastElement.id + 1 : this.allCompanies.length + 1;
-            this.allCompanies.unshift(company);
             const lastCompanyId = this.getMaxOfArray(this.allCompanies.map(c => Number(c.id)));
             if (!company.id) {
                 company.id = this.allCompanies.length ?
                     typeof lastCompanyId === 'string' ? (Number(lastCompanyId) + 1).toString() : (lastCompanyId + 1).toString() : '0';
             }
+            this.allCompanies.unshift(company);
             this.storage.set('companies', this.allCompanies).then(res => {
-                // console.log('added');
+                console.log('added');
             });
-            this.addCompanyForm.reset();
+            // this.addCompanyForm.reset();
             this.navController.navigateBack('home');
         });
     }
 
-    addMap(e) {
+    addLocations(e) {
         console.log(e);
         this.company.address = e;
         Geocoder.geocode({
@@ -137,7 +135,6 @@ export class AddCompanyPage implements OnInit {
             const position = results[0].position;
             this.company.latitude = position.lat.toString();
             this.company.longitude = position.lng.toString();
-            console.log(position);
         });
     }
 }
