@@ -46,7 +46,7 @@ export class DetailsCompanyPage implements OnInit {
 
     const marker: Marker = this.map.addMarkerSync({
       title: 'Ionic',
-      icon: 'blue',
+      icon: 'green',
       animation: 'DROP',
       position: {
         lat: parseFloat(this.company.latitude),

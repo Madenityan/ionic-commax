@@ -6,7 +6,7 @@ ion-header
 ion-content.company-details
   ion-card
     ion-card-content
-      ion-img.img-details([src]="company.image")
+      ion-img.img-details([src]="company.image ? company.image : '../../assets/images/image.png'")
       ion-label {{company.name}}
         h2 {{company.city}}
         p {{company.address}}

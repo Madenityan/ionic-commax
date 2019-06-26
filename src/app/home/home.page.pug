@@ -15,7 +15,7 @@ ion-content.home-content
   ion-list
     ion-item(*ngFor="let company of listCompanies", lines="full")
       ion-thumbnail((click)="openDetails(company)")
-        ion-img([src]="company.image")
+        ion-img.img([src]="company.image ? company.image : '../../assets/images/image.png'")
       ion-label.label-item((click)="openDetails(company)") {{company.name}}
         h2 {{company.city}}
         p {{company.address}}
